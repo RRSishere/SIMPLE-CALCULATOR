@@ -1,34 +1,45 @@
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
 
 int main() {
-    // Seed the random number generator with the current time
-    std::srand(static_cast<unsigned int>(std::time(nullptr)));
-    
-    // Generate a random number between 1 and 100
-    int randomNumber = std::rand() % 100 + 1;
-    
-    int guess;
-    int attempts = 0;
-    
-    std::cout << "Welcome to the Number Guessing Game!" << std::endl;
-    std::cout << "I have selected a number between 1 and 100. Try to guess it!" << std::endl;
-    
-    do {
-        std::cout << "Enter your guess: ";
-        std::cin >> guess;
-        
-        attempts++;
-        
-        if (guess > randomNumber) {
-            std::cout << "Too high! Try again." << std::endl;
-        } else if (guess < randomNumber) {
-            std::cout << "Too low! Try again." << std::endl;
-        } else {
-            std::cout << "Congratulations! You guessed the number " << randomNumber << " in " << attempts << " attempts." << std::endl;
-        }
-    } while (guess != randomNumber);
-    
+    double num1, num2;
+    char operation;
+
+    std::cout << "Simple Calculator" << std::endl;
+    std::cout << "Enter the first number: ";
+    std::cin >> num1;
+
+    std::cout << "Enter an arithmetic operation (+, -, *, /): ";
+    std::cin >> operation;
+
+    std::cout << "Enter the second number: ";
+    std::cin >> num2;
+
+    double result;
+
+    switch (operation) {
+        case '+':
+            result = num1 + num2;
+            break;
+        case '-':
+            result = num1 - num2;
+            break;
+        case '*':
+            result = num1 * num2;
+            break;
+        case '/':
+            if (num2 != 0) {
+                result = num1 / num2;
+            } else {
+                std::cout << "Error: Division by zero is not allowed." << std::endl;
+                return 1; // Exit with an error code
+            }
+            break;
+        default:
+            std::cout << "Invalid operation." << std::endl;
+            return 1; // Exit with an error code
+    }
+
+    std::cout << "Result: " << result << std::endl;
+
     return 0;
 }
